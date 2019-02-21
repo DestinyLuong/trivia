@@ -7,9 +7,10 @@ export class QuestionText extends Component {
   render() {
     return (
       <div className= "qstion">
-        <p>Question?</p>  
+        <p>{this.props.text}</p>  
       </div>
     );
   }
 }
+
 

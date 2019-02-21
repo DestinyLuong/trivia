@@ -5,9 +5,13 @@ export class AnswerButton extends Component {
 
   render() {
     return (
-      <div className="btn">
-        <button class= "answerbtn" id="answerOne">Answer</button>  
-      </div>
+      //If button = correct, else
+    //  if(this.){}
+        <div className="btn">
+          <button class= "answerbtn" id="answerOne">{this.props.choices}</button>  
+        </div>
+     // }
+      //add onResetButtonClicked() to OnClick func
     );
   }
 }
