@@ -8,7 +8,7 @@ export class AnswerButton extends Component {
       //If button = correct, else
     //  if(this.){}
         <div className="btn">
-          <button class= "answerbtn" id="answerOne">{this.props.choices}</button>  
+          <button className= "answerbtn" id="answerOne">{this.props.choices}</button>  
         </div>
      // }
       //add onResetButtonClicked() to OnClick func
