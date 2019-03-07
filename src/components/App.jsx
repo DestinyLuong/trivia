@@ -8,6 +8,7 @@ import {QuestionText} from './QuestionText.jsx';
 
 
 export class App extends Component {
+ // var questionBank = [];
   constructor(props){
     super(props);
     this.state = {question: {},
@@ -16,12 +17,20 @@ export class App extends Component {
         choices: [],
         correct_choice_index: null
       }
+     /* firebaseDatabase.ref('/questions').on('value', (snapshot)=> {
+        lets questions = snaphot.val();
+        let randomQuestion = getRandomQuestion(questions)
+        this.setState({
+            questions: questions,
+            currentQuestion: randomQuestion,
+        })
+     }) */
     }
     getQuestions((questions) => {
       console.log(questions);
       this.setState({
         ...this.state,
-        "questions": questions
+        currentQuestion: questions[0]
       });
     });
   }
