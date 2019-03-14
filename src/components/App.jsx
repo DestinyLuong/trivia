@@ -11,26 +11,21 @@ export class App extends Component {
  // var questionBank = [];
   constructor(props){
     super(props);
-    this.state = {question: {},
+    this.state = {questions: [],
       currentQuestion:{
-        question_text: "lahdhs?",
+        question_text: "Question?",
         choices: [],
         correct_choice_index: null
-      }
-     /* firebaseDatabase.ref('/questions').on('value', (snapshot)=> {
-        lets questions = snaphot.val();
-        let randomQuestion = getRandomQuestion(questions)
-        this.setState({
-            questions: questions,
-            currentQuestion: randomQuestion,
-        })
-     }) */
+      },
+      questionNum: 0,
+      choice: null
     }
-    getQuestions((questions) => {
-      console.log(questions);
+    getQuestions((qs) => {
+      console.log(qs);
       this.setState({
         ...this.state,
-        currentQuestion: questions[0]
+        questions: qs,
+        currentQuestion: qs[this.state.questionNum]
       });
     });
   }
@@ -38,26 +33,36 @@ export class App extends Component {
   onResetButtonClicked(){
     //set question to new one
   }
-  answerButtonClicked(){
+  changeBtnColor(choice){
     this.setState({
-      shouldDisplayAnser: true
+      choice,
     })
   }
   goToNextQuestion(){
     //const currentQ = this.state.currentQuestion;
-    this.getQuestions(this.state.currentQuestion);
-    this.setState({question: "nextQuestion"});
+    var newQuestionNum = this.state.questionNum + 1;
+    this.setState({questionNum: newQuestionNum});
+    this.setState({currentQuestion: this.state.questions[newQuestionNum]});
+    console.log(this.state);
   }
   render(){
+    var answerGreen = this.state.currentQuestion.correct_choice_index;
+    var answerRed;
+    if(answerGreen === this.state.currentQuestion.correct_choice_index){
+      
+    } else{
+      
+    }
     return(
       <div className="app">
         <div>
             <h1 className="head"> Trivia </h1>
-            <QuestionText text={this.state.currentQuestion.question_text} answerButtonClicked= {this.props.answerButtonClicked}/>
-            <AnswerButton onAnswerClick={() => this.gotoNextQuestion()} answerButtonClicked={this.props.answerButtonClicked} choices= {this.state.currentQuestion.choices[0]}/>
-            <AnswerButton onAnswerClick={() => this.gotoNextQuestion()} answerButtonClicked={this.props.answerButtonClicked} choices= {this.state.currentQuestion.choices[1]}/>
-            <AnswerButton onAnswerClick={() => this.gotoNextQuestion()} answerButtonClicked={this.props.answerButtonClicked} choices= {this.state.currentQuestion.choices[2]}/>
-            <AnswerButton onAnswerClick={() => this.gotoNextQuestion()} answerButtonClicked={this.props.answerButtonClicked} choices= {this.state.currentQuestion.choices[3]}/>
+            <QuestionText text={this.state.currentQuestion.question_text}/>
+            <AnswerButton  answerIndex={0} answerButtonClicked={(c) => this.changeBtnColor(c)} choices= {this.state.currentQuestion.choices[0]}/>
+            <AnswerButton  answerIndex={1} answerButtonClicked={(c) => this.changeBtnColor(c)} choices= {this.state.currentQuestion.choices[1]}/>
+            <AnswerButton  answerIndex={2} answerButtonClicked={(c) => this.changeBtnColor(c)} choices= {this.state.currentQuestion.choices[2]}/>
+            <AnswerButton  answerIndex={3} answerButtonClicked={(c) => this.changeBtnColor(c)} choices= {this.state.currentQuestion.choices[3]}/>
+            <button id="nxt" onClick={() => this.goToNextQuestion()}>Next</button>
           </div> 
       </div>
       
